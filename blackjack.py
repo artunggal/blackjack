@@ -194,7 +194,7 @@ class Player(Game):
         return summ
 
     def draw(self):
-    """" Prompts the player to hit or stop """
+        """" Prompts the player to hit or stop """
 
         valid_input = False
         while valid_input is False:
