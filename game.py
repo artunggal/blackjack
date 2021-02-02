@@ -1,11 +1,10 @@
 import random
 
 class Game:
-    def __init__(self, player, dealer, start_Deck, game_Deck):
+    def __init__(self, player, dealer, game_Deck):
         self.player = player
         self.dealer = dealer
         self.cont = True
-        self.start_Deck = start_Deck
         self.game_Deck = game_Deck
 
     def play_game(self):
@@ -18,7 +17,8 @@ class Game:
             self.player.hand.append(self.game_Deck.pop(0))
             self.dealer.hand.append(self.game_Deck.pop(0))
         self.player.game_score = self.player.hand_calculator()
-        self.dealer.game_score = self.dealer.hand_calculator(end = True)
+        self.dealer.game_score = self.dealer.hand_calculator()
+        print("Dealer's Card: ", self.dealer.hand_calculator(end = False))
 
         # do all of the player moves until self.player.stop == True
         while self.player.stop == False:
@@ -27,9 +27,12 @@ class Game:
             #    print(card)
             print("Player Score: ", self.player.game_score)
             if self.player.game_score >= 21:
-                self.dealer.stop = True
-                self.player.stop = True
-                break
+                if self.player.game_score == 21:
+                    self.player.stop = True
+                    break
+                else:
+                    self.player.stop = True
+                    self.dealer.stop = True
             else:
                 self.draw("player")
 
@@ -94,10 +97,11 @@ class Game:
             text = input("Would you like to play again? Y/N: ")
             if text.lower() == "y":
                 valid_input = True
-                self.game_Deck = game_deck
+                print("")
             elif text.lower() == "n":
                 self.cont = False
                 valid_input = True
+                print("")
             else:
                 print("Invalid Answer")
         return

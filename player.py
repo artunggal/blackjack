@@ -68,14 +68,10 @@ class Dealer(Player):
         summ = 0
         ace_count = 0
         if end == False:
-            for i in range(len(self.hand) - 1):
-                to_add = val_dict[self.hand[i]]
-                if "ace" in self.hand[i]:
-                    ace_count += 1
-                summ += to_add
-            if ace_count > 0:
-                if summ + 10 <= 21:
-                    return summ + 10
+            summ = val_dict[self.hand[0]]
+            if "ace" in self.hand[0]:
+                summ += 10
+            return summ
         if end == True:
             for card in self.hand:
                 to_add = val_dict[card]
