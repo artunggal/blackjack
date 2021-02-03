@@ -1,11 +1,12 @@
-import random
+playimport random
 
 class Game:
     def __init__(self, player, dealer, game_Deck):
         self.player = player
         self.dealer = dealer
-        self.cont = True
+        self.play = True
         self.game_Deck = game_Deck
+        self.game_Count = 0
 
     def play_game(self):
         """ Plays a round of blackjack """
@@ -97,9 +98,11 @@ class Game:
             text = input("Would you like to play again? Y/N: ")
             if text.lower() == "y":
                 valid_input = True
+                self.game_Count += 1
                 print("")
             elif text.lower() == "n":
-                self.cont = False
+                self.game_Count += 1
+                self.play = False
                 valid_input = True
                 print("")
             else:
